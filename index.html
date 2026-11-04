@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Minion Casino — не настоящее казино</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800&family=Russo+One&display=swap" rel="stylesheet">
+</head>
+<body data-tab="lobby">
+<svg width="0" height="0" style="position:absolute"><symbol id="lg" viewBox="0 0 120 120">
+<polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="#12071f" stroke="#ff2bd6" stroke-width="5"/>
+<polygon points="60,20 96,40 96,80 60,100 24,80 24,40" fill="none" stroke="#19f0ff" stroke-width="2.5"/>
+<path d="M34 78 L30 46 L46 60 L60 36 L74 60 L90 46 L86 78 Z" fill="#ffd54a" stroke="#fff" stroke-width="1.5"/>
+<circle cx="30" cy="44" r="4" fill="#fff"/><circle cx="60" cy="33" r="4" fill="#fff"/><circle cx="90" cy="44" r="4" fill="#fff"/>
+<rect x="36" y="82" width="48" height="6" rx="3" fill="#ff2bd6"/></symbol></svg>
+
+<div id="splash"><div>
+  <svg class="ls" viewBox="0 0 120 120"><polygon class="d" pathLength="1" points="60,6 108,33 108,87 60,114 12,87 12,33" stroke="#ff2bd6"/><polygon class="d d2" pathLength="1" points="60,20 96,40 96,80 60,100 24,80 24,40" stroke="#19f0ff"/>
+  <path class="cr" d="M34 78 L30 46 L46 60 L60 36 L74 60 L90 46 L86 78 Z"/><circle cx="30" cy="44" r="4"/><circle cx="60" cy="33" r="4"/><circle cx="90" cy="44" r="4"/><rect class="cr" x="36" y="82" width="48" height="6" rx="3" style="fill:#ff2bd6;stroke:none"/></svg>
+  <h1 id="sh1">GOLDEN MINION</h1><p>C A S I N O</p>
+  <button class="gold" id="enter" style="font-size:22px;padding:14px 50px">ВОЙТИ</button>
+  <div style="margin-top:18px;font-size:12px;opacity:.6">18+ · учебный проект · виртуальные фишки</div>
+</div></div>
+
+<header>
+  <div class="brand"><svg class="lgo"><use href="#lg"/></svg><div class="wm"><b>GOLDEN MINION</b><i>CASINO</i></div></div>
+  <div class="stats">
+    <button id="profbtn">👤 Профиль</button>
+    <div class="pill" id="bal"></div><div class="pill debt" id="debt" hidden></div>
+    <button id="snd">🔊</button>
+  </div>
+</header>
+
+<div id="hero"><canvas id="h3d"></canvas></div>
+<div class="tabs" id="tabs">
+  <button data-t="lobby" class="on" hidden>🏠 Лобби</button><button data-t="slots">🍒 Слоты</button><button data-t="roul">🎯 Рулетка</button>
+  <button data-t="lucky">🎡 Колесо удачи</button><button data-t="bj">🃏 Блэкджек</button>
+  <button data-t="poker">♠️ Покер</button><button data-t="crash">🚀 Ракетка</button><button data-t="tumble">🍬 Сладкий взрыв</button><button data-t="dice">🎲 Кости</button><button data-t="shop">💎 Бонусы</button>
+</div>
+
+<div id="prof" hidden></div>
+<main>
+  <div class="bar">Ставка: <button class="chip" data-b="10">10</button><button class="chip" data-b="50">50</button><button class="chip" data-b="100">100</button><button class="chip" data-b="500">500</button></div>
+  <div id="flags" style="text-align:center;min-height:20px;font-size:14px"></div>
+  <div id="msg"></div>
+
+  <section id="lobby" class="on"></section>
+  <section id="slots">
+    <h2 id="sname"></h2>
+    <div class="th" id="th"></div>
+    <div class="reels" id="reels"></div>
+    <div id="fsi"></div>
+    <div class="bar"><button class="gold" id="spin" style="font-size:22px;padding:14px 44px">КРУТИТЬ</button><button class="buy" id="buy"></button><button id="turbo">⚡ Турбо</button><button id="skip" hidden>⏩ Скип</button></div>
+    <p style="font-size:13px;opacity:.7">Линии слева направо от 3 символов · wild заменяет · много scatter = 8 фриспинов с выигрышем ×2</p>
+  </section>
+
+  <section id="roul">
+    <h2>РУЛЕТКА «НЕОН»</h2>
+    <canvas id="rw" width="330" height="330"></canvas>
+    <div class="opts"><span id="rb"></span> <span>число: <input type="number" id="rnum" min="0" max="36"> ×36</span></div>
+    <button class="gold" id="rgo" style="margin-top:12px;font-size:20px;padding:12px 40px">ЗАПУСТИТЬ</button>
+  </section>
+
+  <section id="lucky">
+    <h2>КОЛЕСО УДАЧИ</h2>
+    <canvas id="lw" width="330" height="330"></canvas>
+    <p style="opacity:.75;font-size:14px;margin:6px">Крутишь за ставку — получаешь множитель. Главный приз ×10 💎</p>
+    <button class="gold" id="lgo" style="font-size:20px;padding:12px 40px">КРУТИТЬ КОЛЕСО</button>
+  </section>
+
+  <section id="bj">
+    <h2>БЛЭКДЖЕК</h2>
+    <div>Дилер: <b id="dv"></b></div><div class="hand" id="dh"></div>
+    <div class="hand" id="ph"></div><div>Вы: <b id="pv"></b></div>
+    <div class="bar"><button class="gold" id="deal">Раздать</button><button id="hit" disabled>Ещё</button><button id="stand" disabled>Стоп</button><button id="dbl" disabled>Удвоить</button></div>
+    <p style="font-size:13px;opacity:.7">Блэкджек платит 3:2 · дилер берёт до 17</p>
+  </section>
+
+  <section id="poker">
+    <h2>ПОКЕР</h2>
+    <div class="felt"><div id="seats"></div><div id="board"></div><canvas id="ps" width="170" height="130"></canvas><div id="pot"></div><div class="hand" id="you"></div><em id="me"></em></div>
+    <div class="bar"><button id="pf" disabled>Фолд</button><button id="pk" disabled>Чек</button>
+      <span><input type="range" id="prs" disabled> <b id="pv2"></b></span><button class="buy" id="pr" disabled>Рейз</button></div>
+    <div class="bar"><button id="q1" disabled>Мин</button><button id="q2" disabled>½ банка</button><button id="q3" disabled>Банк</button><button class="gold" id="q4" disabled>ALL-IN 🔥</button><button class="gold" id="pdeal">Новая раздача</button></div>
+    <p style="font-size:13px;opacity:.7">Ты и 3 бота · Texas Hold'em без лимита: ставь сколько хочешь, хоть ALL-IN · есть побочные банки</p>
+  </section>
+  <section id="crash">
+    <h2>РАКЕТКА</h2><div id="chist"></div>
+    <canvas id="cc" width="760" height="360"></canvas>
+    <div class="bar"><button class="gold" id="cgo" style="font-size:20px;padding:12px 36px">СТАРТ</button><button class="buy" id="cout" disabled style="font-size:20px;padding:12px 30px">ЗАБРАТЬ</button><span>авто-вывод ×<input type="number" id="cauto" min="1.1" step="0.1" placeholder="нет"></span></div>
+    <p style="font-size:13px;opacity:.7">Ракета растёт, и в любой момент может упасть. Успей забрать выигрыш до взрыва!</p>
+  </section>
+
+  <section id="tumble">
+    <h2>СЛАДКИЙ ВЗРЫВ</h2>
+    <div id="tg"></div>
+    <button class="gold" id="tgo" style="font-size:22px;padding:14px 44px">КРУТИТЬ</button>
+    <p style="font-size:13px;opacity:.7;margin-top:12px">Каскады: 8+ одинаковых символов в любом месте взрываются, сверху падают новые. Каждый следующий каскад умножает выигрыш: ×1, ×2, ×3...</p>
+  </section>
+  <section id="dice">
+    <h2>3D КОСТИ</h2>
+    <canvas id="dc" width="760" height="280"></canvas>
+    <div class="bar"><button data-d="u">Меньше 7 ×2.2</button><button data-d="s">Ровно 7 ×5.5</button><button data-d="o" class="on">Больше 7 ×2.2</button></div>
+    <button class="gold" id="dgo" style="font-size:20px;padding:12px 40px">БРОСИТЬ КОСТИ</button>
+    <p style="font-size:13px;opacity:.7;margin-top:10px">Бросаются два кубика. Выбери, какой будет сумма. Для 3D нужен интернет (Three.js).</p>
+  </section>
+  <section id="shop">
+    <h2>МАГАЗИН БОНУСОВ</h2>
+    <div class="shop">
+      <div class="item"><h3>✨ Множитель ×2</h3><p>Следующая прибыль удваивается.</p><button class="gold" data-buy="mult">300 <i class="cn"></i></button></div>
+      <div class="item"><h3>🛡️ Страховка</h3><p>Следующий проигрыш — ставка возвращается.</p><button class="gold" data-buy="ins">150 <i class="cn"></i></button></div>
+      <div class="item"><h3>📦 Лутбокс «Сюрприз»</h3><p>Внутри от 0 до 1000 фишек. Повезёт — не повезёт.</p><button class="gold" data-buy="box">100 <i class="cn"></i></button></div>
+      <div class="item"><h3>🕴️ Займ от дяди Вито</h3><p>Берёшь 1000, «отдавать» надо 1500. Дядя Вито всё помнит...</p><button class="gold" data-buy="loan">Взять 1000</button></div>
+      <div class="item"><h3>💸 Вернуть долг</h3><p>Пока ты должен — спать спокойно нельзя.</p><button data-buy="repay">Погасить</button></div>
+      <div class="item"><h3>🔄 Сброс</h3><p>Обнулить баланс, долг, VIP и бонусы — начать с 1000 фишек.</p><button data-buy="reset">Сбросить прогресс</button></div>
+      <div class="item"><h3>🎁 Подарок</h3><p>Раз в сессию — 500 <i class="cn"></i> бесплатно.</p><button class="gold" data-buy="gift">Забрать</button></div>
+    </div>
+  </section>
+</main>
+<footer>⚠️ Учебный проект. Это НЕ настоящее казино: фишки виртуальные, деньги не вносятся и не выводятся. Азартные игры на деньги — зло. 18+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/crash.js"></script>
+<script src="js/tumble.js"></script>
+<script src="js/poker.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/hero3d.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/wheel3d.js"></script>
+<script src="js/lobby.js"></script>
+</body>
+</html>
